@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/locationsListFragment">
+    <fragment
+        android:id="@+id/locationsListFragment"
+        android:name="com.locations.presenter.locationlist.view.LocationsListFragment"
+        tools:layout="@layout/fragment_locations_list">
+
+        <action
+            android:id="@+id/venue_details_action"
+            app:destination="@id/locationsDetailsFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/locationsDetailsFragment"
+        android:name="com.locations.presenter.locationdetails.view.LocationsDetailFragment"
+        tools:layout="@layout/fragment_location_details">
+        <argument
+            android:name="venueId"
+            app:argType="string" />
+    </fragment>
+</navigation>

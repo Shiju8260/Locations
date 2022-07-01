@@ -1,0 +1,56 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId Configs.applicationId
+        minSdk Configs.minSdk
+        targetSdk Configs.targetSdk
+        versionCode Configs.versionCode
+        versionName Configs.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+dependencies {
+    implementation(project(Models.presenter))
+    implementation(project(Models.data))
+
+    //Hilt
+    implementation(Libraries.daggerHiltAndroid)
+    kapt(Libraries.daggerHiltCompiler)
+
+    implementation(Libraries.androidxCore)
+    implementation(Libraries.androidxAppCompat)
+    implementation(Libraries.constraintLayout)
+    implementation(Libraries.livedata)
+    implementation(Libraries.viewmodel)
+    implementation(Libraries.materialDesign)
+    testImplementation(Libraries.junit)
+    androidTestImplementation(Libraries.androidxJunit)
+    androidTestImplementation(Libraries.androidxEspresso)
+}

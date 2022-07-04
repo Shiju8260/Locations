@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk Configs.compileSdk
 
     defaultConfig {
         applicationId Configs.applicationId

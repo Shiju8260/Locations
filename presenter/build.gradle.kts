@@ -65,6 +65,7 @@ dependencies {
     implementation(Libraries.androidxCore)
     implementation(Libraries.androidxAppCompat)
     implementation(Libraries.materialDesign)
+    
     testImplementation(Libraries.junit)
     androidTestImplementation(Libraries.androidxJunit)
     androidTestImplementation(Libraries.androidxEspresso)

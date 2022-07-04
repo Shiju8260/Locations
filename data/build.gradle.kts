@@ -45,10 +45,6 @@ dependencies {
 
     implementation(project(Models.domain))
 
-    implementation(Libraries.androidxCore)
-    implementation(Libraries.androidxAppCompat)
-    implementation(Libraries.materialDesign)
-
     implementation (Libraries.okHttp)
     implementation (Libraries.okHttpLoggingInterceptor)
     implementation (Libraries.coroutines)

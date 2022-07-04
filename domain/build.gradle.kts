@@ -40,9 +40,6 @@ android {
 
 dependencies {
 
-    implementation(Libraries.androidxCore)
-    implementation(Libraries.androidxAppCompat)
-    implementation(Libraries.materialDesign)
 
     implementation (Libraries.retrofit)
     implementation (Libraries.retrofitGsonConverter)

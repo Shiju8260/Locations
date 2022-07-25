@@ -11,12 +11,14 @@ import com.locations.presenter.R
 fun setVenueImage(imageView: ImageView, model: Venue) {
     val photos = model.photos
     val photosGroups = photos.groups
-    val photosGroupsItems = photosGroups.get(0).items.get(0)
-    val sb = StringBuilder()
-    sb.append(photosGroupsItems.prefix).append(photosGroupsItems.width).append("x")
-        .append(photosGroupsItems.height).append(photosGroupsItems.suffix)
-    imageView.load(sb.toString()) {
-        placeholder(R.drawable.ic_launcher_background)
+    if (photosGroups.size > 0 && photosGroups.get(0).items.size > 0) {
+        val photosGroupsItems = photosGroups.get(0).items.get(0)
+        val sb = StringBuilder()
+        sb.append(photosGroupsItems.prefix).append(photosGroupsItems.width).append("x")
+            .append(photosGroupsItems.height).append(photosGroupsItems.suffix)
+        imageView.load(sb.toString()) {
+            placeholder(R.drawable.ic_launcher_background)
+        }
     }
 }
 

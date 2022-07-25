@@ -1,15 +1,15 @@
 package com.locations.presenter.locationlist.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.locations.domain.model.Venue
+import com.locations.presenter.R
 import com.locations.presenter.base.BaseFragment
 import com.locations.presenter.databinding.FragmentLocationsListBinding
 import com.locations.presenter.extension.hide
@@ -33,6 +33,7 @@ class LocationsListFragment : BaseFragment<FragmentLocationsListBinding>(), Venu
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         viewModel = ViewModelProvider(this).get(LocationsListViewModel::class.java)
         navController = NavHostFragment.findNavController(this)
         checkNetworkState()
@@ -75,6 +76,28 @@ class LocationsListFragment : BaseFragment<FragmentLocationsListBinding>(), Venu
                 }
             }
         }
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search, menu)
+        //SearchView on menu
+        val search = menu.findItem(R.id.appSearchBar)
+        val searchView = search.actionView as SearchView
+        searchView.queryHint = getString(R.string.txt_Search)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.setLocation(query?:"")
+                checkNetworkState()
+                searchView.onActionViewCollapsed()
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                return true
+            }
+
+        })
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun errorUI(msg: String) {

@@ -24,6 +24,8 @@ class LocationsListViewModel @Inject constructor(private val venueListUseCase: V
     private val mNetworkState: MutableLiveData<NetworkState> = MutableLiveData()
     val mNetworkStateLiveData: LiveData<NetworkState> by lazy { mNetworkState }
 
+    private var location:String=Constants.PARAM_DEFAULT_LOCATION
+
     fun getVenueList() {
         viewModelScope.launch {
             mNetworkState.value = NetworkState.LOADING
@@ -46,14 +48,20 @@ class LocationsListViewModel @Inject constructor(private val venueListUseCase: V
         }
     }
 
+
+
     //Request params for venue list
     private fun getRequestParamForVenueList(): Map<String, String> {
         val query: HashMap<String, String> = HashMap()
         query[Constants.PARAM_INTENT] = "browse"
-        query[Constants.PARAM_NEAR] = "Minneapolis"
+        query[Constants.PARAM_NEAR] = location
         query[Constants.PARAM_RADIUS] = "10000"
-        query[Constants.PARAM_LIMIT] = "10"
+        query[Constants.PARAM_LIMIT] = "20"
         query[Constants.PARAM_VENUEPHOTOS] = "1"
         return query
+    }
+
+    fun setLocation(location: String) {
+        this.location = location
     }
 }
